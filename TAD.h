@@ -1,0 +1,1 @@
+typedef struct *AeropuertoCDT AeropuertoADT
