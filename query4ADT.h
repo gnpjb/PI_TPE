@@ -7,6 +7,7 @@ query4ADT newQuery4();
 //locFlag es un flag que dicta si el oaci es de un aeropuerto local o no local
 void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char locFlagAter);
 void freeQuery4(query4ADT query);
+void printQuery4(query4ADT query, FILE *fd);
 
 typedef struct query4CDT* query4ADT;
 
