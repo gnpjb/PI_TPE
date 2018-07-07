@@ -2,6 +2,10 @@
 #define TAD_H_INCLUDED
 
 //definicion de constantes que usara el TAD AeropuertoCDT
+#define LONG_CODIGO_LOCAL 3
+#define LONG_CODIGO_OACI 4
+#define LONG_CODIGO_IATA 4
+
 enum{A_AERODROMO,A_HELIPUERTO};
 enum{A_PUBLICO,A_PRIVADO};
 enum{A_NACIONAL, A_INTERNACIONAL};
@@ -20,7 +24,7 @@ typedef struct VEHora{
 }VTHora;
 
 
-typedef struct vuelosCDT* vuelosADT;
+typedef struct vueloCDT* vueloADT;
 
 
 typedef struct *AeropuertoCDT AeropuertoADT;

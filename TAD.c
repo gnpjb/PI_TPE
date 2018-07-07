@@ -1,9 +1,5 @@
 #include "TAD.h"//!!ATENTION placeholder
 
-#define LONG_CODIGO_LOCAL 3
-#define LONG_CODIGO_OACI 4
-#define LONG_CODIGO_IATA 4
-
 
 //estructura para manejo de datos de aeropuertos
 typedef struct AeropuertoCDT{
@@ -16,39 +12,53 @@ typedef struct AeropuertoCDT{
 	char trafico;
 }AeropuertoCDT;
 
+AeropuertoADT newAeropuerto(){
+	AeropuertoADT resp=calloc(1,sizeof(*resp));
+	return resp;
+}
 
 void setAeropuertoLocal(AeropuertoADT aeropuerto, char local[]){
-	for( int i=0 ; i<LONG_CODIGO_LOCAL ; i++){
-		aeropuerto->local[i]=local[i];
-	}
+	memcpy(aeropuerto->local,local,LONG_CODIGO_LOCAL);
 }
 
 
 
 void setAeropuertoOACI(AeropuertoADT aeropuerto, char oaci[]){
-	for(int i=0; i<LONG_CODIGO_OACI; i++){
-		aeropuerto->oaci[i]=oaci[i];
-	}
+	memcpy(aeropuerto->oaci,oaci,LONG_CODIGO_OACI);
 }
 
 
 
 void setAeropuertoIATA(AeropuertoADT aeropuerto, char iata[]){
-	for(int i=0; i<LONG_CODIGO_IATA; i++){
-		aeropuerto->iata[i]=iata[i];
-	}
+	memcpy(aeropuerto->iata,iata,LONG_CODIGO_IATA);
+}
+
+void freeAeropuerto(AeropuertoADT ap){
+	free(ap->denominacion);
+	free(ap);
 }
 
 
-
-
-
-typedef struct vuelosCDT{
+//estructura para el manejo de datos de vuelos
+typedef struct vueloCDT{
 	VTFecha fecha;
 	VTHora hora;
 	char clasificacion;
 	char tipoDeMov;
-	char origOaci[];
-	char destOaci[];
-	char
-}vuelosCDT;
+	char origOaci[4];
+	char destOaci[4];
+	char *nomAerolin;
+	char *aeronave;
+	char anAPC;
+}vueloCDT;
+
+vueloADT newVuelo(){
+	vueloADT resp=calloc(1,sizeof(*resp));
+	return resp;
+}
+
+void freeVuelo(vueloADT v){
+	free(v->nomAerolin);
+	free(v->aeronave);
+	free(v);
+}
