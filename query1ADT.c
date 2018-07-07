@@ -54,24 +54,25 @@ void add1(query1ADT query, char * oaci, char * local, char * desc){
     no se encontro*/
 
     else{
-
+		int found=0;
         aux=query->first;
-        while(aux->next!=NULL && !(strcmp(oaci, aux->next->oaci)<0)){
+        while(aux->next!=NULL && !(strcmp(oaci, aux->next->oaci)<0) && !found){
             if(strcmp(oaci, aux->next->oaci)==0){
 
                 aux->next->count++;
-                return;
+                found=1;
             }
         }
-
-        q1Node * new = malloc(sizeof(q1Node));
-        new->desc = malloc(strlen(desc)+1);
-        strcpy(new->desc, desc);
-        strcpy(new->oaci, oaci);
-        strcpy(new->local, local);
-        new->cant++;
-        new->next=aux->next;
-        aux->next=new;
+		if(!found){
+	        q1Node * new = malloc(sizeof(q1Node));
+	        new->desc = malloc(strlen(desc)+1);
+	        strcpy(new->desc, desc);
+	        strcpy(new->oaci, oaci);
+	        strcpy(new->local, local);
+	        new->cant++;
+	        new->next=aux->next;
+	        aux->next=new;
+		}
     }
 
 }

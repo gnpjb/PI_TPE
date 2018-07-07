@@ -182,6 +182,24 @@ void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char lo
 	}
 }
 
+static void printQuery4Head(query4Head* head, FILE * fd){
+	query4Node* aux=head->first;
+	while(head!=NULL){
+		fprintf(fd, "%.4s;%.4s;%ld;%ld\n",head->localOaci,aux->otroOaci,aux->aterrizajes,aux->despegues);
+	}
+}
+
+void printQuery4(query4ADT query, FILE * fd){
+
+    if(query==NULL || query->first==NULL)
+        return;
+    fprintf(fd, "\n\n***Query 4: Cantidad de movimientos***\n\noaciLocal;otroOaci;vuelosHacia;vuelosDesde\n");
+    for(query4Head aux = query->first; aux!=NULL; aux=aux->next){
+		printQuery4Head(aux,fd);
+    }
+    return;
+
+}
 
 //funciones de liberacion de memoria
 static void freeQuery4Head(query4Head* qHead){

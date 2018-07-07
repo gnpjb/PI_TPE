@@ -62,33 +62,34 @@ void add2(query2ADT query, char * oaci, char * iata, int isOrigin){
     no se encontro*/
 
     else{
-
+		int found=1;
         aux=query->first;
-        while(aux->next!=NULL && !(strcmp(oaci, aux->next->oaci)<0)){
+        while(aux->next!=NULL && !(strcmp(oaci, aux->next->oaci)<0) && !found){
             if(strcmp(oaci, aux->next->oaci)==0){
 
                 if(isOrigin)
                     aux->next->tkoffs++;
                 else aux->next->ldings++;
                 aux->next->suma++;
-                return;
+                found=1;
             }
         }
-
-        q2Node * new = malloc(sizeof(q2Node));
-        strcpy(new->iata, iata);
-        strcpy(new->oaci, oaci);
-        if(isOrigin){
-            new->tkoffs=1;
-            new->ldings=0;
-        }
-        else{
-            new->tkoffs=0;
-            new->ldings=1;
-        }
-        new->suma=1;
-        new->next=aux->next;
-        aux->next=new;
+		if(!found){
+	        q2Node * new = malloc(sizeof(q2Node));
+	        strcpy(new->iata, iata);
+	        strcpy(new->oaci, oaci);
+	        if(isOrigin){
+	            new->tkoffs=1;
+	            new->ldings=0;
+	        }
+	        else{
+	            new->tkoffs=0;
+	            new->ldings=1;
+	        }
+	        new->suma=1;
+	        new->next=aux->next;
+	        aux->next=new;
+		}
     }
 }
 
