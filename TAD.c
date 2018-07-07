@@ -38,3 +38,17 @@ void setAeropuertoIATA(AeropuertoADT aeropuerto, char iata[]){
 		aeropuerto->iata[i]=iata[i];
 	}
 }
+
+
+
+
+
+typedef struct vuelosCDT{
+	VTFecha fecha;
+	VTHora hora;
+	char clasificacion;
+	char tipoDeMov;
+	char origOaci[];
+	char destOaci[];
+	char
+}vuelosCDT;
