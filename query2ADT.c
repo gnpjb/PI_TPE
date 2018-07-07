@@ -19,6 +19,10 @@ query2ADT newQuery2(){
     return calloc(1, sizeof(query2CDT));
 }
 
+/*
+	isOrigin es una variable que dicta si es un vuelo que llega (isOrigin==0)
+	o que sale(isOrigin==1)
+*/
 void add2(query2ADT query, char * oaci, char * iata, int isOrigin){
 
     q2Node *aux;
