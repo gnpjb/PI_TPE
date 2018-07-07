@@ -19,10 +19,6 @@ query2ADT newQuery2(){
     return calloc(1, sizeof(query2CDT));
 }
 
-/*
-	isOrigin es una variable que dicta si es un vuelo que llega (isOrigin==0)
-	o que sale(isOrigin==1)
-*/
 void add2(query2ADT query, char * oaci, char * iata, int isOrigin){
 
     q2Node *aux;
@@ -95,6 +91,20 @@ void add2(query2ADT query, char * oaci, char * iata, int isOrigin){
         aux->next=new;
     }
 }
+
+void printQuery2(query2ADT query, FILE * fd){
+
+    if(query==NULL || query->first==NULL)
+        return;
+
+    fprintf(fd, "\n\n***Query 2: Movimientos Internacionales***\n\noaci;iata;cant_despg;cant_aterr;suma\n");
+    for(q2Node aux = query->first; aux!=NULL; aux=aux->next){
+        fprintf(fd, "%4s%3s%d%d%d\n", aux->oaci, aux->iata, aux->tkoffs, aux->ldings, aux->suma);
+    }
+    return;
+
+}
+
 
 void freeQuery2(query2ADT query){
 

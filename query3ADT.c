@@ -1,7 +1,7 @@
 #include "query3ADT.h"
 
 typedef struct query3CDT{
-    long days[7];
+    long days[DAYS];
 } query3CDT;
 
 query3ADT newQuery3(void){
@@ -11,6 +11,22 @@ query3ADT newQuery3(void){
 void add3(query3ADT query, int day){
 
     query->days[day]++;
+}
+
+void printQuery3(query3ADT query, FILE * fd){
+
+    if(query==NULL)
+        return;
+
+    char *days[DAYS]={"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
+
+    fprintf(fd, "\n\n***Query 3: Cantidad de Vuelos Por Dia de Semana***\n");
+    for(int i=0; i<DAYS; i++){
+
+        fprintf(fd, "%s:%d\n", days[i], query->days[i]);
+    }
+    return;
+
 }
 
 void freeQuery3(query3ADT query){
