@@ -26,10 +26,10 @@ void process_query1(query1ADT query, vueloADT vuelo){
 void process_query2(query2ADT query, vueloADT vuelo){
 
     if(vuelo->clasificacion==INT){
-        if(enListaAero(vuelo->origOaci)){ //Busca al aeropuerto en la lista de aeropuertos locales (segun oaci)
+        if(enAeroLista(vuelo->origOaci)){ //Busca al aeropuerto en la lista de aeropuertos locales (segun oaci)
                 add2(query, vuelo->origOaci, getIata(vuelo->origOaci), ORIG);
         }
-        else if(enListaAero(vuelo->destOaci)){
+        else if(enAeroLista(vuelo->destOaci)){
                 add2(query, vuelo->destOaci, getIata(vuelo->destOaci), DEST);
         }
     }
@@ -45,7 +45,7 @@ void process_query3(query3ADT query, vueloADT vuelo){
 }
 
 void process_query4(query4ADT query,vueloADT vuelo){
-	int flagLocDes=enListaAero(vuelo->origOaci)
-	,flagLocAter=enListaAero(vuelo->destOaci);
+	int flagLocDes=enAeroLista(vuelo->origOaci)
+	,flagLocAter=enAeroLista(vuelo->destOaci);
 	add4(query,vuelo->origOaci,flagLocDes,vuelo->destOaci,flagLocAter);
 }

@@ -23,10 +23,24 @@ typedef struct VEHora{
 	int minuto
 }VTHora;
 
-
-typedef struct vueloCDT* vueloADT;
+typedef struct vueloCDT{
+	VTFecha fecha;
+	VTHora hora;
+	char clasificacion;
+	char tipoDeMov;
+	char origOaci[4];
+	char destOaci[4];
+	char *nomAerolin;
+	char *aeronave;
+	char anAPC;
+}vueloCDT;
 
 
 typedef struct *AeropuertoCDT AeropuertoADT;
+typedef struct *AeroListaCDT AeroListaADT;
 
+AeroListaADT newAeroLista();
+void addAeroLista(AeroListaADT,AeropuertoADT);
+//dado un oaci lo busca en la tabla de aeropuertos, devuelve 1 si esta y 0 si no
+int enAeroLista(AeroListaADT,char oaci[]);
 #endif
