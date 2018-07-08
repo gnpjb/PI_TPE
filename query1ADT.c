@@ -62,6 +62,7 @@ void add1(query1ADT query, char * oaci, char * local, char * desc){
                 aux->next->count++;
                 found=1;
             }
+		aux=aux->next;
         }
 		if(!found){
 	        q1Node * new = malloc(sizeof(q1Node));
