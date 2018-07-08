@@ -43,3 +43,9 @@ void process_query3(query3ADT query, vueloADT vuelo){
         query->days[c]++;
     }
 }
+
+void process_query4(query4ADT query,vueloADT vuelo){
+	int flagLocDes=enListaAero(vuelo->origOaci)
+	,flagLocAter=enListaAero(vuelo->destOaci);
+	add4(query,vuelo->origOaci,flagLocDes,vuelo->destOaci,flagLocAter);
+}
