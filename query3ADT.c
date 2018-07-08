@@ -20,7 +20,7 @@ void printQuery3(query3ADT query, FILE * fd){
 
     char *days[DAYS]={"Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"};
 
-    fprintf(fd, "\n\n***Query 3: Cantidad de Vuelos Por Dia de Semana***\n");
+    fprintf(fd, "DiaDeLaSemana:vuelos\n");
     for(int i=0; i<DAYS; i++){
 
         fprintf(fd, "%s:%d\n", days[i], query->days[i]);

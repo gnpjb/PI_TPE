@@ -84,7 +84,7 @@ void printQuery1(query1ADT query, FILE * fd){
         return;
     char * fmt = malloc(MAX_FMT);
 
-    fprintf(fd, "\n\n***Query 1: Cantidad de movimientos***\n\noaci;local;desc;cant_movs\n");
+    fprintf(fd, "oaci;local;desc;cant_movs\n");
     for(q1Node aux = query->first; aux!=NULL; aux=aux->next){
         sprintf(fmt, "%%4s;%%3s;%%%ds;%%d\n", strlen(aux->desc));
         fprintf(fd, fmt, aux->oaci, aux->local, aux->desc, aux->cant);

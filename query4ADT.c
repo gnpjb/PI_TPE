@@ -191,14 +191,12 @@ static void printQuery4Head(query4Head* head, FILE * fd){
 
 void printQuery4(query4ADT query, FILE * fd){
 
-    if(query==NULL || query->first==NULL)
-        return;
-    fprintf(fd, "\n\n***Query 4: Cantidad de movimientos***\n\noaciLocal;otroOaci;vuelosHacia;vuelosDesde\n");
-    for(query4Head aux = query->first; aux!=NULL; aux=aux->next){
-		printQuery4Head(aux,fd);
-    }
-    return;
-
+    if(query!=NULL && query->first!=NULL){
+	    fprintf(fd, "oaciLocal;otroOaci;vuelosHacia;vuelosDesde\n");
+	    for(query4Head aux = query->first; aux!=NULL; aux=aux->next){
+			printQuery4Head(aux,fd);
+	    }
+	}
 }
 
 //funciones de liberacion de memoria

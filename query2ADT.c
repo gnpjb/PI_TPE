@@ -98,7 +98,7 @@ void printQuery2(query2ADT query, FILE * fd){
     if(query==NULL || query->first==NULL)
         return;
 
-    fprintf(fd, "\n\n***Query 2: Movimientos Internacionales***\n\noaci;iata;cant_despg;cant_aterr;suma\n");
+    fprintf(fd, "oaci;iata;cant_despg;cant_aterr;suma\n");
     for(q2Node aux = query->first; aux!=NULL; aux=aux->next){
         fprintf(fd, "%4s%3s%d%d%d\n", aux->oaci, aux->iata, aux->tkoffs, aux->ldings, aux->suma);
     }
