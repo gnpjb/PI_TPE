@@ -13,7 +13,7 @@ int main( int argc, char *argv[] ){
 		int year;
 		sscanf(argv[1],"%d",&year);
 		if(year>=2014 && year<=2018){
-			
+
 			/*
 				1. Pasar todos los aeropuertos a memoria, supongo
 				que con estructuras de 4 campos (oaci, iata,
@@ -23,7 +23,6 @@ int main( int argc, char *argv[] ){
 				que convenga), por cada vuelo ejecutar los process
 				3. Imprimir todo
 			*/
-			//aca sucede el programa
 
 		}
 		else{
