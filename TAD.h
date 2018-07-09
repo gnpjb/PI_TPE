@@ -35,12 +35,36 @@ typedef struct vueloCDT{
 	char anAPC;
 }vueloCDT;
 
+typedef struct vueloCDT* vueloADT; 
 
 typedef struct *AeropuertoCDT AeropuertoADT;
 typedef struct *AeroListaCDT AeroListaADT;
+
+AeropuertoADT newAeropuerto();
+
+void setAeropuertoLocal(AeropuertoADT aeropuerto, char local[]);
+void setAeropuertoOACI(AeropuertoADT aeropuerto, char oaci[]);
+void setAeropuertoIATA(AeropuertoADT aeropuerto, char iata[]);
+void setAeropuertoTipo(AeropuertoADT aeropuerto,int tipo);
+void setAeropuertoDenominacion(AeropuertoADT aeropuerto,char *denominacion);
+void setAeropuertoCondicion(AeropuertoADT aeropuerto, char condicion);
+void setAeropuertoTrafico(AeropuertoADT aeropuerto, char trafico);
+
+char* getAeropuertoLocal(AeropuertoADT aeropuerto);
+char* getAeropuertoOACI(AeropuertoADT aeropuerto);
+void getAeropuertoIATA(AeropuertoADT aeropuerto);
+void getAeropuertoTipo(AeropuertoADT aeropuerto);
+void getAeropuertoDenominacion(AeropuertoADT aeropuerto);
+void getAeropuertoCondicion(AeropuertoADT aeropuerto);
+void getAeropuertoTrafico(AeropuertoADT aeropuerto);
+
+void freeAeropuerto(AeropuertoADT ap);
+
 
 AeroListaADT newAeroLista();
 void addAeroLista(AeroListaADT,AeropuertoADT);
 //dado un oaci lo busca en la tabla de aeropuertos, devuelve 1 si esta y 0 si no
 int enAeroLista(AeroListaADT,char oaci[]);
+AeropuertoADT getAeropuertoFromAeroLista(AeroListaADT,char oaci[]);
+void freeAeroLista(AeroListaADT);
 #endif

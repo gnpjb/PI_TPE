@@ -1,3 +1,9 @@
+#include "process_queries.h"
+#include "TAD.h"
+#include "query1ADT.h"
+#include "query2ADT.h"
+#include "query3ADT.h"
+#include "query4ADT.h"
 #define LOC 0
 #define INT 1
 #define ORIG 1
@@ -9,33 +15,54 @@
     Estas son las cosas que irian en el while del main, cada vez que tomamos un vuelo.
 */
 
+static int getDayOfWeek(VTFecha fecha){
+	int f,k,m,d,c;
+
+	k=fecha.dia;
+
+	m=fecha.mes;
+	m-=2;
+	m=m>0?m:m+12;
+
+	d=m>=11?( fecha.anio % 100)-1:fecha.anio%100;
+
+	c=fecha.anio/100;
+
+	f = k + ((13*m - 1)/5) + d + (d/4) + (c/4) - 2*c;//la regla de zeller
+	f=f%7;
+
+	return (f==0?7:f)-1;
+}
 
 //Agrega los datos provisorios al query1.
-void process_query1(query1ADT query, vueloADT vuelo){
+static void process_query1(query1ADT query, vueloADT vuelo,
+	AeropuertoADT orig,AeropuertoADT dest){
 
     //getLocal y getDesc se supone que obtengan los datos correspondientes de la tabla
     //de aeropuertos que pasamos a memoria. No se si se la pasamos a una funcion o usamos
     //una variable global
-
-    add1(query, vuelo->origOaci, getLocal(vuelo->origOaci), getDesc(vuelo->origOaci));
-    add1(query, vuelo->destOaci, getLocal(vuelo->destOaci), getDesc(vuelo->destOaci));
-
-
+	if(orig!=NULL){
+		add1(query, vuelo->origOaci, getAeropuertoLocal(orig), getAeropuertoDenominacion(orig));
+	}
+	if(dest!=NULL){
+		add1(query, vuelo->destOaci, getAeropuertoLocal(dest), getAeropuertoDenominacion(dest));
+	}
 }
 
-void process_query2(query2ADT query, vueloADT vuelo){
+static void process_query2(query2ADT query, vueloADT vuelo,
+	AeropuertoADT orig,AeropuertoADT dest){
 
     if(vuelo->clasificacion==INT){
-        if(enAeroLista(vuelo->origOaci)){ //Busca al aeropuerto en la lista de aeropuertos locales (segun oaci)
-                add2(query, vuelo->origOaci, getIata(vuelo->origOaci), ORIG);
+        if(orig!=NULL){ //Busca al aeropuerto en la lista de aeropuertos locales (segun oaci)
+                add2(query, vuelo->origOaci, getAeropuertoIATA(orig), ORIG);
         }
-        else if(enAeroLista(vuelo->destOaci)){
-                add2(query, vuelo->destOaci, getIata(vuelo->destOaci), DEST);
+        else if(dest!=NULL){
+                add2(query, vuelo->destOaci, getAeropuertoIATA(dest), DEST);
         }
     }
 }
 
-void process_query3(query3ADT query, vueloADT vuelo){
+static void process_query3(query3ADT query, vueloADT vuelo){
 
     int c;
     if(c=getDayOfWeek(vuelo->fecha)!=-1){  /*getDayOfWeek recibe una fecha y retorna un dia de semana [0-6],
@@ -44,8 +71,25 @@ void process_query3(query3ADT query, vueloADT vuelo){
     }
 }
 
-void process_query4(query4ADT query,vueloADT vuelo){
-	int flagLocDes=enAeroLista(vuelo->origOaci)
-	,flagLocAter=enAeroLista(vuelo->destOaci);
+static void process_query4(query4ADT query,vueloADT vuelo,
+	AeropuertoADT orig,AeropuertoADT dest){
+
+	int flagLocDes=orig!=NULL;
+	,flagLocAter=dest!=NULL;
 	add4(query,vuelo->origOaci,flagLocDes,vuelo->destOaci,flagLocAter);
+}
+
+void processVuelo(
+	AeroListaADT aerolista,
+	query1ADT query1,query2ADT query2,query3ADT query3, query4ADT query4ADT,
+	vueloADT vuelo){
+
+	AeropuertoADT aOrig,aDest;
+
+	aOrig=getAeropuertoFromAeroLista(aerolista,vuelo->origOaci);
+	aDest=getAeropuertoFromAeroLista(aerolista,vuelo->destOaci);
+	process_query1(query1,vuelo,aOrig,aDest);
+	process_query2(query2,vuelo,aOrig,aDest);
+	process_query3(query3,vuelo);
+	process_query4(query4,vuelo,aOrig,aDest);
 }

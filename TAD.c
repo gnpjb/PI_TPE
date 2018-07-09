@@ -27,18 +27,49 @@ AeropuertoADT newAeropuerto(){
 void setAeropuertoLocal(AeropuertoADT aeropuerto, char local[]){
 	memcpy(aeropuerto->local,local,LONG_CODIGO_LOCAL);
 }
-
-
-
 void setAeropuertoOACI(AeropuertoADT aeropuerto, char oaci[]){
 	memcpy(aeropuerto->oaci,oaci,LONG_CODIGO_OACI);
 }
-
-
-
 void setAeropuertoIATA(AeropuertoADT aeropuerto, char iata[]){
 	memcpy(aeropuerto->iata,iata,LONG_CODIGO_IATA);
 }
+void setAeropuertoTipo(AeropuertoADT aeropuerto,int tipo){
+	aeropuerto->tipo=tipo;
+}
+void setAeropuertoDenominacion(AeropuertoADT aeropuerto,char *denominacion){
+	aeropuerto->denominacion=malloc(strlen(denominacion)+1);
+	strcpy(aeropuerto->denominacion,denominacion);
+}
+void setAeropuertoCondicion(AeropuertoADT aeropuerto, char condicion){
+	aeropuerto->condicion=condicion;
+}
+void setAeropuertoTrafico(AeropuertoADT aeropuerto, char trafico){
+	aeropuerto->trafico=trafico;
+}
+
+
+char* getAeropuertoLocal(AeropuertoADT aeropuerto){
+	return aeropuerto->local;
+}
+char* getAeropuertoOACI(AeropuertoADT aeropuerto){
+	return aeropuerto->oaci;
+}
+void getAeropuertoIATA(AeropuertoADT aeropuerto){
+	return aeropuerto->iata;
+}
+void getAeropuertoTipo(AeropuertoADT aeropuerto){
+	return aeropuerto->tipo;
+}
+void getAeropuertoDenominacion(AeropuertoADT aeropuerto){
+	return aeropuerto->denominacion;
+}
+void getAeropuertoCondicion(AeropuertoADT aeropuerto){
+	return aeropuerto->condicion;
+}
+void getAeropuertoTrafico(AeropuertoADT aeropuerto){
+	return aeropuerto->trafico;
+}
+
 
 void freeAeropuerto(AeropuertoADT ap){
 	free(ap->denominacion);
@@ -110,4 +141,35 @@ int enAeroLista(AeroListaADT lista, char oaci[]){
 		aux=aux->next;
 	}
 	return found;
+}
+
+
+AeropuertoADT getAeropuertoFromAeroLista(AeroListaADT lista,char oaci[]){
+	int c,found=0;
+	AeroListaNode *aux;
+	AeropuertoADT resp=NULL;
+	while(!found&&aux!=NULL&&c<0){
+		if((c=memcmp(oaci,aux->aeropuerto.oaci))==0){
+			found=1;
+		}
+		else{
+			aux=aux->next;
+		}
+	}
+	if(found){
+		resp=&aux->aeropuerto;
+	}
+	return resp;
+}
+
+
+void freeAeroLista(AeroListaADT lista){
+	AeroListaNode* aux=lista->first,aux1;
+	while(aux!=NULL){
+		aux1=aux->next;
+		free(aux->aeropuerto.denominacion);
+		free(aux);
+		aux=aux1;
+	}
+	free(lista);
 }
