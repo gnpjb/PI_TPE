@@ -84,5 +84,7 @@ AeroListaADT cargarAeropuertos(char *filename){
 			addAeroLista(resp,toAdd);
 		}
 	}
+	freeAeropuerto(toAdd);
+	fclose(f);
 	return resp;
 }

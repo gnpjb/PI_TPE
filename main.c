@@ -1,19 +1,19 @@
 #include <stdio.h>
-
 #include "query1ADT.h"
 #include "query2ADT.h"
 #include "query3ADT.h"
 #include "query4ADT.h"
 #include "TAD.h"
+#include "cargarAeropuertos.h"
 
-
+#define NOMBRE_ARCHIVO_AEROPUERTOS ""
+#define NOMBRE_ARCHIVO_VUELOS ""
 
 int main( int argc, char *argv[] ){
 	if(int argc==2){
 		int year;
 		sscanf(argv[1],"%d",&year);
 		if(year>=2014 && year<=2018){
-
 			/*
 				1. Pasar todos los aeropuertos a memoria, supongo
 				que con estructuras de 4 campos (oaci, iata,
@@ -23,6 +23,7 @@ int main( int argc, char *argv[] ){
 				que convenga), por cada vuelo ejecutar los process
 				3. Imprimir todo
 			*/
+			AeroListaADT aeropuertos=cargarAeropuertos(NOMBRE_ARCHIVO_VUELOS);
 
 		}
 		else{
