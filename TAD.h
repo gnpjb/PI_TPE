@@ -20,22 +20,37 @@ typedef struct VEFecha{
 
 typedef struct VEHora{
 	int hora;
-	int minuto
+	int minuto;
 }VTHora;
 
-typedef struct vueloCDT{
-	VTFecha fecha;
-	VTHora hora;
-	char clasificacion;
-	char tipoDeMov;
-	char origOaci[4];
-	char destOaci[4];
-	char *nomAerolin;
-	char *aeronave;
-	char anAPC;
-}vueloCDT;
+typedef struct vueloCDT* vueloADT;
 
-typedef struct vueloCDT* vueloADT; 
+vueloADT newVuelo();
+
+void setVueloFecha(vueloADT vuelo,VTFecha fecha);
+void setVueloHora(vueloADT vuelo,VTHora hora);
+void setVueloClasificacion(vueloADT vuelo,char clasificacion);
+void setVueloTipoDeMov(vueloADT vuelo,char tipoDeMov);
+void setVueloOrigOaci(vueloADT vuelo,char origOaci[]);
+void setVueloDestOaci(vueloADT vuelo,char destOaci[]);
+void setVueloNomAerolin(vueloADT vuelo,char *nomAerolin);
+void setVueloAeronave(vueloADT vuelo,char *aeronave);
+void setVueloANAPC(vueloADT vuelo,char anAPC);
+
+VTFecha getVueloFecha(vueloADT vuelo);
+VTHora getVueloHora(vueloADT vuelo);
+char getVueloClasificacion(vueloADT vuelo);
+char getVueloTipoDeMov(vueloADT vuelo);
+char *getVueloOrigOaci(vueloADT vuelo);
+char *getVueloDestOaci(vueloADT vuelo);
+char* getVueloNomAerolin(vueloADT vuelo);
+char* getVueloAeronave(vueloADT vuelo);
+char getVueloANAPC(vueloADT vuelo);
+
+void freeVuelo(vueloADT vuelo);
+
+
+
 
 typedef struct *AeropuertoCDT AeropuertoADT;
 typedef struct *AeroListaCDT AeroListaADT;

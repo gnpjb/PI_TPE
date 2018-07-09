@@ -173,3 +173,90 @@ void freeAeroLista(AeroListaADT lista){
 	}
 	free(lista);
 }
+
+/*
+-------------------------------------------------------------------------------
+vuelos:
+*/
+
+typedef struct vueloCDT{
+	VTFecha fecha;
+	VTHora hora;
+	char clasificacion;
+	char tipoDeMov;
+	char origOaci[4];
+	char destOaci[4];
+	char *nomAerolin;
+	char *aeronave;
+	char anAPC;
+}vueloCDT;
+
+vueloADT newVuelo(){
+	vueloADT resp=calloc(1,sizeof(*resp));
+	return resp;
+}
+
+void setVueloFecha(vueloADT vuelo,VTFecha fecha){
+	vuelo->fecha=fecha;
+}
+void setVueloHora(vueloADT vuelo,VTHora hora){
+	vuelo->hora=hora;
+}
+void setVueloClasificacion(vueloADT vuelo,char clasificacion){
+	vuelo->clasificacion=clasificacion;
+}
+void setVueloTipoDeMov(vueloADT vuelo,char tipoDeMov){
+	vuelo->tipoDeMov=tipoDeMov;
+}
+void setVueloOrigOaci(vueloADT vuelo,char origOaci[]){
+	memcpy(vuelo->origOaci,origOaci,LONG_CODIGO_OACI);
+}
+void setVueloDestOaci(vueloADT vuelo,char destOaci[]){
+	memcpy(vuelo->destOaci,destOaci,LONG_CODIGO_OACI);
+}
+void setVueloNomAerolin(vueloADT vuelo,char *nomAerolin){
+	vuelo->nomAerolin=malloc(strlen(nomAerolin));
+	strcpy(vuelo->nomAerolin,nomAerolin);
+}
+void setVueloAeronave(vueloADT vuelo,char *aeronave){
+	vuelo->aeronave=malloc(strlen(aeronave));
+	strcpy(vuelo->aeronave,aeronave);
+}
+void setVueloANAPC(vueloADT vuelo,char anAPC){
+	vuelo->anAPC=anAPC;
+}
+
+
+VTFecha getVueloFecha(vueloADT vuelo){
+	return vuelo->fecha;
+}
+VTHora getVueloHora(vueloADT vuelo){
+	return vuelo->hora;
+}
+char getVueloClasificacion(vueloADT vuelo){
+	return vuelo->clasificacion;
+}
+char getVueloTipoDeMov(vueloADT vuelo){
+	return vuelo->tipoDeMov;
+}
+char *getVueloOrigOaci(vueloADT vuelo){
+	return vuelo->origOaci;
+}
+char *getVueloDestOaci(vueloADT vuelo){
+	return vuelo->destOaci;
+}
+char* getVueloNomAerolin(vueloADT vuelo){
+	return vuelo->nomAerolin;
+}
+char* getVueloAeronave(vueloADT vuelo){
+	return vuelo->aeronave;
+}
+char getVueloANAPC(vueloADT vuelo){
+	return vuelo->anAPC;
+}
+
+void freeVuelo(vueloADT vuelo){
+	free(vuelo->nomAerolin);
+	free(vuelo->aeronave);
+	free(vuelo);
+}

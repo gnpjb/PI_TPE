@@ -5,6 +5,7 @@
 #include "query4ADT.h"
 #include "TAD.h"
 #include "cargarAeropuertos.h"
+#include "cargarNextVuelo.h"
 
 #define NOMBRE_ARCHIVO_AEROPUERTOS ""
 #define NOMBRE_ARCHIVO_VUELOS ""
@@ -25,6 +26,50 @@ int main( int argc, char *argv[] ){
 			*/
 			AeroListaADT aeropuertos=cargarAeropuertos(NOMBRE_ARCHIVO_VUELOS);
 
+			if(aeropuertos==NULL){
+				exit(1);
+			}
+
+			query1ADT query1=newQuery1();
+			query2ADT query2=newQuery2();
+			query3ADT query3=newQuery3();
+			query4ADT query4=newQuery4();
+			vueloADT vuelo=newVuelo();
+			VTFecha fecha;
+
+			FILE* fVuelos=fopen(NOMBRE_ARCHIVO_VUELOS,"rt");
+			while(!feof(fVuelos)){
+				cargarNextVuelo(fVuelos,vuelo);
+				fecha=getVueloFecha(vuelo);
+				if(fecha.anio==year){
+					processVuelo(aeropuertos,query1,query2,query3,query4,vuelo);
+				}
+			}
+			fclose(fVuelos);
+
+			FILE* fsalida=fopen("movs_aeropuerto.csv","wt");
+			printQuery1(query1,fsalida);
+			fclose(fsalida);
+
+			FILE* fsalida=fopen("movs_internacional.csv","wt");
+			printQuery2(query2,fsalida);
+			fclose(fsalida);
+
+			FILE* fsalida=fopen("semanal.csv","wt");
+			printQuery3(query3,fsalida);
+			fclose(fsalida);
+
+			FILE* fsalida=fopen("aerop_detalle.csv","wt");
+			printQuery4(query4,fsalida);
+			fclose(fsalida);
+
+			freeQuery1(query1);
+			freeQuery2(query2);
+			freeQuery3(query3);
+			freeQuery4(query4);
+
+			freeVuelo(vuelo);
+			freeAeroLista(aeropuertos);
 		}
 		else{
 			printf("Argumento incorrecto. El argumento debe ser un año entre 2014 y 2018\n");

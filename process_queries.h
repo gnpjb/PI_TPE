@@ -6,6 +6,7 @@ void processVuelo(
 	query1ADT query1,
 	query2ADT query2,
 	query3ADT query3,
-	query4ADT query4ADT);
+	query4ADT query4ADT,
+	vueloADT vuelo);
 
 #endif

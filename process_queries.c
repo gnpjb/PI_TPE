@@ -42,22 +42,22 @@ static void process_query1(query1ADT query, vueloADT vuelo,
     //de aeropuertos que pasamos a memoria. No se si se la pasamos a una funcion o usamos
     //una variable global
 	if(orig!=NULL){
-		add1(query, vuelo->origOaci, getAeropuertoLocal(orig), getAeropuertoDenominacion(orig));
+		add1(query, getVueloOrigOaci(vuelo), getAeropuertoLocal(orig), getAeropuertoDenominacion(orig));
 	}
 	if(dest!=NULL){
-		add1(query, vuelo->destOaci, getAeropuertoLocal(dest), getAeropuertoDenominacion(dest));
+		add1(query, getVueloDestOaci(vuelo), getAeropuertoLocal(dest), getAeropuertoDenominacion(dest));
 	}
 }
 
 static void process_query2(query2ADT query, vueloADT vuelo,
 	AeropuertoADT orig,AeropuertoADT dest){
 
-    if(vuelo->clasificacion==INT){
+    if(getVueloClasificacion(vuelo)==INT){
         if(orig!=NULL){ //Busca al aeropuerto en la lista de aeropuertos locales (segun oaci)
-                add2(query, vuelo->origOaci, getAeropuertoIATA(orig), ORIG);
+                add2(query, getVueloOrigOaci(vuelo), getAeropuertoIATA(orig), ORIG);
         }
         else if(dest!=NULL){
-                add2(query, vuelo->destOaci, getAeropuertoIATA(dest), DEST);
+                add2(query, getVueloDestOaci(vuelo), getAeropuertoIATA(dest), DEST);
         }
     }
 }
@@ -65,7 +65,7 @@ static void process_query2(query2ADT query, vueloADT vuelo,
 static void process_query3(query3ADT query, vueloADT vuelo){
 
     int c;
-    if(c=getDayOfWeek(vuelo->fecha)!=-1){  /*getDayOfWeek recibe una fecha y retorna un dia de semana [0-6],
+    if(c=getDayOfWeek(getVueloFecha(vuelo))!=-1){  /*getDayOfWeek recibe una fecha y retorna un dia de semana [0-6],
                                                 si hay algun error retorna -1*/
         query->days[c]++;
     }
@@ -76,7 +76,7 @@ static void process_query4(query4ADT query,vueloADT vuelo,
 
 	int flagLocDes=orig!=NULL;
 	,flagLocAter=dest!=NULL;
-	add4(query,vuelo->origOaci,flagLocDes,vuelo->destOaci,flagLocAter);
+	add4(query,getVueloOrigOaci(vuelo),flagLocDes,getVueloDestOaci(vuelo),flagLocAter);
 }
 
 void processVuelo(
@@ -86,8 +86,8 @@ void processVuelo(
 
 	AeropuertoADT aOrig,aDest;
 
-	aOrig=getAeropuertoFromAeroLista(aerolista,vuelo->origOaci);
-	aDest=getAeropuertoFromAeroLista(aerolista,vuelo->destOaci);
+	aOrig=getAeropuertoFromAeroLista(aerolista,getVueloOrigOaci(vuelo));
+	aDest=getAeropuertoFromAeroLista(aerolista,getVueloDestOaci(vuelo));
 	process_query1(query1,vuelo,aOrig,aDest);
 	process_query2(query2,vuelo,aOrig,aDest);
 	process_query3(query3,vuelo);

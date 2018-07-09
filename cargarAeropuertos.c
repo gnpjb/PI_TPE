@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <string.h>
+#include "cargarAeropuertos.h"
 
 #define DELIM ";"
 #define MAX_LONG_LINEA 500
 
 AeroListaADT cargarAeropuertos(char *filename){
 
-	FILE* f=fopen(filename);
+	FILE* f=fopen(filename,"rt");
 	if(f==NULL){
 		return NULL
 	}
