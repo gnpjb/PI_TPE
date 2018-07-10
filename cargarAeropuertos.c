@@ -18,7 +18,7 @@ AeroListaADT cargarAeropuertos(char *filename){
 
 	char linea[MAX_LONG_LINEA];
 
-	int c,i,error;
+	int c,i;
 	char *field;
 	while(!feof(f)){
 		i=0;

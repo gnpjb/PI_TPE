@@ -5,9 +5,9 @@
 
 #define DELIM ";"
 #define MAX_LONG_LINEA 500
-#define ASCIINUM_TO_INT(c) (c-'0')
+#define ASCIINUM_TO_INT(c) ((int)(c-'0'))
 
-void cargarNextVuelo(FILE *f,vueloADT vuelo){
+AeroListaADT cargarNextVuelo(FILE *f,vueloADT vuelo){
 	char *field,linea[MAX_LONG_LINEA];
 	int c,i=0;
 	VTFecha fecha;
@@ -25,7 +25,7 @@ void cargarNextVuelo(FILE *f,vueloADT vuelo){
 	//luego la hora
 	field=strtok(NULL,DELIM);
 	hora.hora=ASCIINUM_TO_INT(field[0])*10+ASCIINUM_TO_INT(field[1]);
-	hora.min=ASCIINUM_TO_INT(field[3])*10+ASCIINUM_TO_INT(field[4]);
+	hora.minuto=ASCIINUM_TO_INT(field[3])*10+ASCIINUM_TO_INT(field[4]);
 	setVueloHora(vuelo,hora);
 	//luego ignoramos el siguiente
 	strtok(NULL,DELIM);
@@ -63,6 +63,6 @@ void cargarNextVuelo(FILE *f,vueloADT vuelo){
 	setVueloAeronave(vuelo,field);
 	//y por ultimo el apc
 	field=strtok(NULL,DELIM);
-	setVueloANAPC(vuelo,field);
+	setVueloANAPC(vuelo,field[0]);
 
 }
