@@ -109,7 +109,7 @@ AeroListaADT newAeroLista(){
 void addAeroLista(AeroListaADT lista,AeropuertoADT aeropuerto){
 	AeroListaNode *aux=lista->first,*aux1;
 	int c;
-	if(aeropuerto==NULL){
+	if(aeropuerto==NULL||aeropuerto->oaci[0]==0){
 		return;
 	}
 	//si es el primero lo agrega al principio
