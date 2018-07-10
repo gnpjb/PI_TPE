@@ -145,7 +145,7 @@ void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char lo
 		//si no hay nada en first o hay que insertar antes de first
 		if(query->first==NULL||(c=memcmp(oaciAter,query->first->localOaci,LONG_OACI)<0)){
 			aux=query->first;
-			query->first=malloc(sizeof(*newFirst));
+			query->first=malloc(sizeof(*query->first));
 			query->first->next=aux;
 			memcpy(query->first->localOaci,oaciAter,LONG_OACI);
 			query->first->first=NULL;
@@ -205,7 +205,7 @@ void printQuery4(query4ADT query, FILE * fd){
 
 //funciones de liberacion de memoria
 static void freeQuery4Head(query4Head* qHead){
-	query4Node *aux=qHead->next,*aux1;
+	query4Head *aux=qHead->next,*aux1;
 	while(aux!=NULL){
 		aux1=aux->next;
 		free(aux);
