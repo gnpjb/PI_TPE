@@ -26,7 +26,7 @@ AeroListaADT cargarAeropuertos(char *filename){
 
 		//segundo field es oaci, de que este exista depende si es valido o no
 		field=strtok(NULL,DELIM);
-		if(strlen(field)==3){
+		if(strlen(field)==4){
 			setAeropuertoOACI(toAdd,field);
 
 			//tercer field es iata
