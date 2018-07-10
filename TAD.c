@@ -16,8 +16,10 @@ typedef struct AeropuertoCDT{
 
 static void copyAeropuerto(AeropuertoADT dest,AeropuertoADT src){
 	memcpy(dest,src,sizeof(*dest));
-	dest->denominacion=malloc(strlen(src->denominacion)+1);
-	strcpy(dest->denominacion,src->denominacion);
+	if(src->denominacion!=NULL){
+		dest->denominacion=malloc(strlen(src->denominacion)+1);
+		strcpy(dest->denominacion,src->denominacion);
+	}
 }
 
 AeropuertoADT newAeropuerto(){
@@ -38,8 +40,10 @@ void setAeropuertoTipo(AeropuertoADT aeropuerto,int tipo){
 	aeropuerto->tipo=tipo;
 }
 void setAeropuertoDenominacion(AeropuertoADT aeropuerto,char *denominacion){
-	aeropuerto->denominacion=malloc(strlen(denominacion)+1);
-	strcpy(aeropuerto->denominacion,denominacion);
+	if(denominacion!=NULL&&denominacion[0]!=0){
+		aeropuerto->denominacion=malloc(strlen(denominacion)+1);
+		strcpy(aeropuerto->denominacion,denominacion);
+	}
 }
 void setAeropuertoCondicion(AeropuertoADT aeropuerto, char condicion){
 	aeropuerto->condicion=condicion;
@@ -101,6 +105,9 @@ AeroListaADT newAeroLista(){
 void addAeroLista(AeroListaADT lista,AeropuertoADT aeropuerto){
 	AeroListaNode *aux=lista->first,*aux1;
 	int c;
+	if(aeropuerto==NULL){
+		return;
+	}
 	//si es el primero lo agrega al principio
 	if(aux==NULL||(c=memcmp(aux->aeropuerto.oaci,aeropuerto->oaci,LONG_CODIGO_OACI))<0){
 		lista->first=malloc(sizeof(*lista->first));
@@ -136,6 +143,9 @@ void addAeroLista(AeroListaADT lista,AeropuertoADT aeropuerto){
 int enAeroLista(AeroListaADT lista, char oaci[]){
 	AeroListaNode* aux=lista->first;
 	int found=0,c;
+	if(oaci==NULL||oaci[0]==0){
+		return 0;
+	}
 	while(!found && aux!=NULL && (c=memcmp(oaci,aux->aeropuerto.oaci,LONG_CODIGO_OACI))>=0){
 		if(c==0){
 			found=1;
@@ -150,6 +160,9 @@ AeropuertoADT getAeropuertoFromAeroLista(AeroListaADT lista,char oaci[]){
 	int c,found=0;
 	AeroListaNode *aux;
 	AeropuertoADT resp=NULL;
+	if(oaci==NULL||oaci[0]=0){
+		return NULL;
+	}
 	while(!found&&aux!=NULL&&c<0){
 		if((c=memcmp(oaci,aux->aeropuerto.oaci,LONG_CODIGO_OACI))==0){
 			found=1;
@@ -211,18 +224,22 @@ void setVueloTipoDeMov(vueloADT vuelo,char tipoDeMov){
 	vuelo->tipoDeMov=tipoDeMov;
 }
 void setVueloOrigOaci(vueloADT vuelo,char origOaci[]){
-	memcpy(vuelo->origOaci,origOaci,LONG_CODIGO_OACI);
+		memcpy(vuelo->origOaci,origOaci,LONG_CODIGO_OACI);
 }
 void setVueloDestOaci(vueloADT vuelo,char destOaci[]){
-	memcpy(vuelo->destOaci,destOaci,LONG_CODIGO_OACI);
+		memcpy(vuelo->destOaci,destOaci,LONG_CODIGO_OACI);
 }
 void setVueloNomAerolin(vueloADT vuelo,char *nomAerolin){
-	vuelo->nomAerolin=malloc(strlen(nomAerolin));
-	strcpy(vuelo->nomAerolin,nomAerolin);
+	if(nomAerolin!=NULL&&nomAerolin[0]!=0){
+		vuelo->nomAerolin=malloc(strlen(nomAerolin));
+		strcpy(vuelo->nomAerolin,nomAerolin);
+	}
 }
 void setVueloAeronave(vueloADT vuelo,char *aeronave){
-	vuelo->aeronave=malloc(strlen(aeronave));
-	strcpy(vuelo->aeronave,aeronave);
+	if(nomAerolin!=NULL&&nomAerolin[0]!=0){
+		vuelo->aeronave=malloc(strlen(aeronave));
+		strcpy(vuelo->aeronave,aeronave);
+	}
 }
 void setVueloANAPC(vueloADT vuelo,char anAPC){
 	vuelo->anAPC=anAPC;
