@@ -17,7 +17,7 @@ int main( int argc, char *argv[] ){
 		int year;
 		sscanf(argv[1],"%d",&year);
 		if(year>=2014 && year<=2018){
-			AeroListaADT aeropuertos=cargarAeropuertos(NOMBRE_ARCHIVO_VUELOS);
+			AeroListaADT aeropuertos=cargarAeropuertos(NOMBRE_ARCHIVO_AEROPUERTOS);
 
 			if(aeropuertos==NULL){
 				return 1;
