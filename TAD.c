@@ -15,7 +15,12 @@ typedef struct AeropuertoCDT{
 }AeropuertoCDT;
 
 static void copyAeropuerto(AeropuertoADT dest,AeropuertoADT src){
-	memcpy(dest,src,sizeof(*dest));
+	strcpy(dest->local,src->local);
+	strcpy(dest->oaci,src->oaci);
+	strcpy(dest->iata,src->iata);
+	dest->tipo=src->tipo;
+	dest->condicion=src->condicion;
+	dest->trafico=src->trafico;
 	if(src->denominacion!=NULL){
 		dest->denominacion=malloc(strlen(src->denominacion)+1);
 		strcpy(dest->denominacion,src->denominacion);
@@ -113,7 +118,7 @@ void addAeroLista(AeroListaADT lista,AeropuertoADT aeropuerto){
 		return;
 	}
 	//si es el primero lo agrega al principio
-	if(aux==NULL||(c=strcmp(aux->aeropuerto.oaci,aeropuerto->oaci))<0){
+	if(aux==NULL||(c=strcmp(aux->aeropuerto.oaci,aeropuerto->oaci))>0){
 		lista->first=malloc(sizeof(*lista->first));
 		lista->first->next=aux;
 		copyAeropuerto(&lista->first->aeropuerto,aeropuerto);
@@ -133,6 +138,7 @@ void addAeroLista(AeroListaADT lista,AeropuertoADT aeropuerto){
 				alreadyIn=1;
 			}
 			else{
+				aux1=aux;
 				aux=aux->next;
 			}
 		}
@@ -161,7 +167,7 @@ int enAeroLista(AeroListaADT lista, char oaci[]){
 
 
 AeropuertoADT getAeropuertoFromAeroLista(AeroListaADT lista,char oaci[]){
-	int c,found=0;
+	int c=-1,found=0;
 	AeroListaNode *aux=lista->first;
 	AeropuertoADT resp=NULL;
 	if(oaci==NULL||oaci[0]==0){
