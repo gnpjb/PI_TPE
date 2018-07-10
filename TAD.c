@@ -14,9 +14,9 @@ typedef struct AeropuertoCDT{
 	char trafico;
 }AeropuertoCDT;
 
-static void copyAeropuerto(AeropuertoADT dest,AeroListaADT src){
+static void copyAeropuerto(AeropuertoADT dest,AeropuertoADT src){
 	memcpy(dest,src,sizeof(*dest));
-	dest->denominacion=malloc(strlen(src->denominacion));
+	dest->denominacion=malloc(strlen(src->denominacion)+1);
 	strcpy(dest->denominacion,src->denominacion);
 }
 
@@ -55,19 +55,19 @@ char* getAeropuertoLocal(AeropuertoADT aeropuerto){
 char* getAeropuertoOACI(AeropuertoADT aeropuerto){
 	return aeropuerto->oaci;
 }
-void getAeropuertoIATA(AeropuertoADT aeropuerto){
+char* getAeropuertoIATA(AeropuertoADT aeropuerto){
 	return aeropuerto->iata;
 }
-void getAeropuertoTipo(AeropuertoADT aeropuerto){
+char getAeropuertoTipo(AeropuertoADT aeropuerto){
 	return aeropuerto->tipo;
 }
-void getAeropuertoDenominacion(AeropuertoADT aeropuerto){
+char* getAeropuertoDenominacion(AeropuertoADT aeropuerto){
 	return aeropuerto->denominacion;
 }
-void getAeropuertoCondicion(AeropuertoADT aeropuerto){
+char getAeropuertoCondicion(AeropuertoADT aeropuerto){
 	return aeropuerto->condicion;
 }
-void getAeropuertoTrafico(AeropuertoADT aeropuerto){
+char getAeropuertoTrafico(AeropuertoADT aeropuerto){
 	return aeropuerto->trafico;
 }
 
@@ -101,7 +101,7 @@ void addAeroLista(AeroListaADT lista,AeropuertoADT aeropuerto){
 	AeroListaNode *aux=lista->first,*aux1;
 	int c;
 	//si es el primero lo agrega al principio
-	if(aux==NULL||(c=memcmp(aux->aeropuerto.oaci,aeropuerto->oaci))<0){
+	if(aux==NULL||(c=memcmp(aux->aeropuerto.oaci,aeropuerto->oaci,LONG_CODIGO_OACI))<0){
 		lista->first=malloc(sizeof(*lista->first));
 		lista->first->next=aux;
 		copyAeropuerto(&lista->first->aeropuerto,aeropuerto);
@@ -114,7 +114,7 @@ void addAeroLista(AeroListaADT lista,AeropuertoADT aeropuerto){
 		//lo busca, si encuentra uno con el mismo oaci no hace nada
 		//sino cuando encuentra el lugar lo agrega
 		while(!found&&!alreadyIn){
-			if(aux==NULL||(c=memcmp(aux->aeropuerto.oaci,aeropuerto->oaci))<0){
+			if(aux==NULL||(c=memcmp(aux->aeropuerto.oaci,aeropuerto->oaci,LONG_CODIGO_OACI))<0){
 				found=1;
 			}
 			else if(c==0){
@@ -150,7 +150,7 @@ AeropuertoADT getAeropuertoFromAeroLista(AeroListaADT lista,char oaci[]){
 	AeroListaNode *aux;
 	AeropuertoADT resp=NULL;
 	while(!found&&aux!=NULL&&c<0){
-		if((c=memcmp(oaci,aux->aeropuerto.oaci))==0){
+		if((c=memcmp(oaci,aux->aeropuerto.oaci,LONG_CODIGO_OACI))==0){
 			found=1;
 		}
 		else{
@@ -165,7 +165,7 @@ AeropuertoADT getAeropuertoFromAeroLista(AeroListaADT lista,char oaci[]){
 
 
 void freeAeroLista(AeroListaADT lista){
-	AeroListaNode* aux=lista->first,*aux1;
+	AeroListaNode *aux=lista->first,*aux1;
 	while(aux!=NULL){
 		aux1=aux->next;
 		free(aux->aeropuerto.denominacion);

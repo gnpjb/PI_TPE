@@ -56,11 +56,11 @@ static void addToHead(query4Head* head, char otroOaci[],int tipoDeMov){
 	}
 	else{
 		int found=0;
-		query4Node* wAux,wAuxPrev;
+		query4Node	*wAux,*wAuxPrev;
 		wAuxPrev=head->first;
 		wAux=wAuxPrev->next;
 		while(!found){
-			if(wAux==NULL||(c=memcmp(otroOaci,wAux->otroOaci))<0){
+			if(wAux==NULL||(c=memcmp(otroOaci,wAux->otroOaci,LONG_OACI))<0){
 				wAuxPrev->next=malloc(sizeof(*wAuxPrev->next));
 				memcpy(wAuxPrev->next->otroOaci,otroOaci,LONG_OACI);
 				wAuxPrev->next->aterrizajes=0;
@@ -97,10 +97,10 @@ void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char lo
 		//si no hay nada en first o hay que insertar antes de first
 		if(query->first==NULL||(c=memcmp(oaciDes,query->first->localOaci,LONG_OACI)<0)){
 			aux=query->first;
-			query->first=malloc(sizeof(*newFirst));
+			query->first=malloc(sizeof(*query->first));
 			query->first->next=aux;
 			memcpy(query->first->localOaci,oaciDes,LONG_OACI);
-			query->first->first=NULL
+			query->first->first=NULL;
 			addToHead(query->first,oaciAter,DES);
 		}
 
@@ -148,7 +148,7 @@ void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char lo
 			query->first=malloc(sizeof(*newFirst));
 			query->first->next=aux;
 			memcpy(query->first->localOaci,oaciAter,LONG_OACI);
-			query->first->first=NULL
+			query->first->first=NULL;
 			addToHead(query->first,oaciDes,ATER);
 		}
 
@@ -205,7 +205,7 @@ void printQuery4(query4ADT query, FILE * fd){
 
 //funciones de liberacion de memoria
 static void freeQuery4Head(query4Head* qHead){
-	query4Node* aux=qHead->next,aux1;
+	query4Node *aux=qHead->next,*aux1;
 	while(aux!=NULL){
 		aux1=aux->next;
 		free(aux);
@@ -215,7 +215,7 @@ static void freeQuery4Head(query4Head* qHead){
 }
 
 void freeQuery4(query4ADT query){
-	query4Head* aux=query->first,aux1;
+	query4Head *aux=query->first,*aux1;
 	while(aux!=NULL){
 		aux1=aux->next;
 		freeQuery4Head(aux);
