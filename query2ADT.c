@@ -1,7 +1,7 @@
-#include "query2ADT.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "query2ADT.h"
 
 typedef struct query2CDT{
     q2Node * first;
@@ -100,7 +100,7 @@ void printQuery2(query2ADT query, FILE * fd){
         return;
 
     fprintf(fd, "oaci;iata;cant_despg;cant_aterr;suma\n");
-    for(q2Node aux = query->first; aux!=NULL; aux=aux->next){
+    for(q2Node *aux = query->first; aux!=NULL; aux=aux->next){
         fprintf(fd, "%4s%3s%d%d%d\n", aux->oaci, aux->iata, aux->tkoffs, aux->ldings, aux->suma);
     }
     return;

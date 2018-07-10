@@ -1,7 +1,7 @@
-#include "query4ADT.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include "query4ADT.h"
 
 #define LONG_OACI 4
 #define ATER 1
