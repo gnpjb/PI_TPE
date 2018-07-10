@@ -162,7 +162,7 @@ int enAeroLista(AeroListaADT lista, char oaci[]){
 
 AeropuertoADT getAeropuertoFromAeroLista(AeroListaADT lista,char oaci[]){
 	int c,found=0;
-	AeroListaNode *aux;
+	AeroListaNode *aux=lista->first;
 	AeropuertoADT resp=NULL;
 	if(oaci==NULL||oaci[0]==0){
 		return NULL;
