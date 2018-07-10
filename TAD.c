@@ -165,7 +165,7 @@ AeropuertoADT getAeropuertoFromAeroLista(AeroListaADT lista,char oaci[]){
 
 
 void freeAeroLista(AeroListaADT lista){
-	AeroListaNode* aux=lista->first,aux1;
+	AeroListaNode* aux=lista->first,*aux1;
 	while(aux!=NULL){
 		aux1=aux->next;
 		free(aux->aeropuerto.denominacion);
