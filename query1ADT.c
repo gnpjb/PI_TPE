@@ -88,7 +88,7 @@ void printQuery1(query1ADT query, FILE * fd){
 
     fprintf(fd, "oaci;local;desc;cant_movs\n");
     for(q1Node aux = query->first; aux!=NULL; aux=aux->next){
-        sprintf(fmt, "%%4s;%%3s;%%%ds;%%ld\n", strlen(aux->desc));
+        sprintf(fmt, "%%4s;%%3s;%%%lus;%%ld\n", (unsigned long)strlen(aux->desc));
         fprintf(fd, fmt, aux->oaci, aux->local, aux->desc, aux->cant);
     }
     free(fmt);
