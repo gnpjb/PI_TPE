@@ -3,10 +3,6 @@
 #include <stdlib.h>
 #include "query1ADT.h"
 
-typedef struct query1CDT{
-    q1Node * first;
-    int count;
-} query1CDT;
 
 typedef struct q1Node{
 
@@ -17,6 +13,11 @@ typedef struct q1Node{
     struct q1Node * next;
 
 }q1Node;
+
+typedef struct query1CDT{
+	q1Node * first;
+	int count;
+} query1CDT;
 
 query1ADT newQuery1(){
     return calloc(1, sizeof(query1CDT));
@@ -87,7 +88,7 @@ void printQuery1(query1ADT query, FILE * fd){
 
     fprintf(fd, "oaci;local;desc;cant_movs\n");
     for(q1Node aux = query->first; aux!=NULL; aux=aux->next){
-        sprintf(fmt, "%%4s;%%3s;%%%ds;%%d\n", strlen(aux->desc));
+        sprintf(fmt, "%%4s;%%3s;%%%ds;%%ld\n", strlen(aux->desc));
         fprintf(fd, fmt, aux->oaci, aux->local, aux->desc, aux->cant);
     }
     free(fmt);
@@ -97,7 +98,7 @@ void printQuery1(query1ADT query, FILE * fd){
 
 void freeQuery1(query1ADT query){
 
-    q1Node * aux = query->first, aux1;
+    q1Node * aux = query->first, *aux1;
     while(aux!=NULL){
 
         aux1 = aux->next;
