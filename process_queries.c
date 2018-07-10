@@ -66,7 +66,7 @@ static void process_query2(query2ADT query, vueloADT vuelo,
 static void process_query3(query3ADT query, vueloADT vuelo){
 
     int c;
-    if(c=getDayOfWeek(getVueloFecha(vuelo))!=-1){  /*getDayOfWeek recibe una fecha y retorna un dia de semana [0-6],
+    if((c=getDayOfWeek(getVueloFecha(vuelo)))!=-1){  /*getDayOfWeek recibe una fecha y retorna un dia de semana [0-6],
                                                 si hay algun error retorna -1*/
         add3(query,c);
     }
