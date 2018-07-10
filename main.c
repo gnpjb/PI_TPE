@@ -12,7 +12,7 @@
 #define NOMBRE_ARCHIVO_VUELOS ""
 
 int main( int argc, char *argv[] ){
-	if(int argc==2){
+	if(argc==2){
 		int year;
 		sscanf(argv[1],"%d",&year);
 		if(year>=2014 && year<=2018){

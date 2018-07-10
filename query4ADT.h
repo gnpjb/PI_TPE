@@ -1,7 +1,9 @@
 #ifndef QUERY4ADT_H_INCLUDED
 #define QUERY4ADT_H_INCLUDED
 
-enum{Q4_LOCAL,Q4_NO_LOCAL}
+enum{Q4_LOCAL,Q4_NO_LOCAL};
+
+typedef struct query4CDT* query4ADT;
 
 query4ADT newQuery4();
 //locFlag es un flag que dicta si el oaci es de un aeropuerto local o no local
