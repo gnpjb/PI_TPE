@@ -67,11 +67,11 @@ void setAeropuertoTrafico(AeropuertoADT aeropuerto, char trafico);
 
 char* getAeropuertoLocal(AeropuertoADT aeropuerto);
 char* getAeropuertoOACI(AeropuertoADT aeropuerto);
-void getAeropuertoIATA(AeropuertoADT aeropuerto);
-void getAeropuertoTipo(AeropuertoADT aeropuerto);
-void getAeropuertoDenominacion(AeropuertoADT aeropuerto);
-void getAeropuertoCondicion(AeropuertoADT aeropuerto);
-void getAeropuertoTrafico(AeropuertoADT aeropuerto);
+char* getAeropuertoIATA(AeropuertoADT aeropuerto);
+char getAeropuertoTipo(AeropuertoADT aeropuerto);
+char* getAeropuertoDenominacion(AeropuertoADT aeropuerto);
+char getAeropuertoCondicion(AeropuertoADT aeropuerto);
+char getAeropuertoTrafico(AeropuertoADT aeropuerto);
 
 void freeAeropuerto(AeropuertoADT ap);
 
