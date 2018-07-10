@@ -9,8 +9,8 @@
 #include "cargarNextVuelo.h"
 #include "process_queries.h"
 
-#define NOMBRE_ARCHIVO_AEROPUERTOS ""
-#define NOMBRE_ARCHIVO_VUELOS ""
+#define NOMBRE_ARCHIVO_AEROPUERTOS "aeropuertos.csv"
+#define NOMBRE_ARCHIVO_VUELOS "vuelos.csv"
 
 int main( int argc, char *argv[] ){
 	if(argc==2){
