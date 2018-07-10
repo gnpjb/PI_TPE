@@ -3,10 +3,6 @@
 #include <stdio.h>
 #include "query2ADT.h"
 
-typedef struct query2CDT{
-    q2Node * first;
-} query2CDT;
-
 typedef struct q2Node{
     char oaci[5];
     char iata[4];
@@ -15,6 +11,11 @@ typedef struct q2Node{
     long suma;
     struct q2Node * next;
 } q2Node;
+
+
+typedef struct query2CDT{
+	q2Node * first;
+} query2CDT;
 
 query2ADT newQuery2(){
     return calloc(1, sizeof(query2CDT));
