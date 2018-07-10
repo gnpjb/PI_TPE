@@ -73,7 +73,8 @@ char getAeropuertoTrafico(AeropuertoADT aeropuerto){
 
 
 void freeAeropuerto(AeropuertoADT ap){
-	free(ap->denominacion);
+	if(ap->denominacion!=NULL)
+		free(ap->denominacion);
 	free(ap);
 }
 
