@@ -164,7 +164,7 @@ AeropuertoADT getAeropuertoFromAeroLista(AeroListaADT lista,char oaci[]){
 	int c,found=0;
 	AeroListaNode *aux;
 	AeropuertoADT resp=NULL;
-	if(oaci==NULL||oaci[0]=0){
+	if(oaci==NULL||oaci[0]==0){
 		return NULL;
 	}
 	while(!found&&aux!=NULL&&c<0){
