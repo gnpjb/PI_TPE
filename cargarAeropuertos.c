@@ -18,16 +18,9 @@ AeroListaADT cargarAeropuertos(char *filename){
 
 	char linea[MAX_LONG_LINEA];
 
-	int c,i;
+	int c;
 	char *field;
-	while(!feof(f)){
-		i=0;
-		while((c=fgetc(f))!='\n'){
-			linea[i]=c;
-			i++;
-		}
-		linea[i]=0;
-
+	while(fgets(linea,MAX_LONG_LINEA,f)){
 		//primer field es local
 		field=strtok(linea,DELIM);
 		setAeropuertoLocal(toAdd,field);
