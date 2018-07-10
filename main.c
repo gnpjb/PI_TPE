@@ -20,7 +20,7 @@ int main( int argc, char *argv[] ){
 			AeroListaADT aeropuertos=cargarAeropuertos(NOMBRE_ARCHIVO_VUELOS);
 
 			if(aeropuertos==NULL){
-				exit(1);
+				return 1;
 			}
 
 			query1ADT query1=newQuery1();
