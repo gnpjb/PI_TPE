@@ -1,7 +1,7 @@
-#include "cargarNextVuelo.h"
-#include "TAD.h"
 #include <stdio.h>
 #include <string.h>
+#include "TAD.h"
+#include "cargarNextVuelo.h"
 
 #define DELIM ";"
 #define MAX_LONG_LINEA 500

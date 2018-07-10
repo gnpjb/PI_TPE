@@ -22,7 +22,6 @@ AeroListaADT cargarAeropuertos(char *filename){
 	char *field;
 	while(!feof(f)){
 		i=0;
-		error=0;
 		while((c=fgetc(f))!='\n'){
 			linea[i]=c;
 			i++;
@@ -70,7 +69,7 @@ AeroListaADT cargarAeropuertos(char *filename){
 			}
 
 			//ignoramos los siguientes 4 fields
-			for(int k=0;k<4){
+			for(int k=0;k<4;k++){
 				strtok(NULL,DELIM);
 			}
 
