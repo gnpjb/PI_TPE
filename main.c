@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "query1ADT.h"
 #include "query2ADT.h"
 #include "query3ADT.h"
