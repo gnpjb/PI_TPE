@@ -61,7 +61,7 @@ void add1(query1ADT query, char * oaci, char * local, char * desc){
         while(aux->next!=NULL && !(strcmp(oaci, aux->next->oaci)<0) && !found){
             if(strcmp(oaci, aux->next->oaci)==0){
 
-                aux->next->count++;
+                aux->next->cant++;
                 found=1;
             }
 		aux=aux->next;
@@ -87,7 +87,7 @@ void printQuery1(query1ADT query, FILE * fd){
     char * fmt = malloc(MAX_FMT);
 
     fprintf(fd, "oaci;local;desc;cant_movs\n");
-    for(q1Node aux = query->first; aux!=NULL; aux=aux->next){
+    for(q1Node *aux = query->first; aux!=NULL; aux=aux->next){
         sprintf(fmt, "%%4s;%%3s;%%%lus;%%ld\n", (unsigned long)strlen(aux->desc));
         fprintf(fd, fmt, aux->oaci, aux->local, aux->desc, aux->cant);
     }
