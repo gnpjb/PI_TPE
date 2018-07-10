@@ -7,7 +7,7 @@
 #define MAX_LONG_LINEA 500
 #define ASCIINUM_TO_INT(c) ((int)(c-'0'))
 
-AeroListaADT cargarNextVuelo(FILE *f,vueloADT vuelo){
+vueloADT cargarNextVuelo(FILE *f,vueloADT vuelo){
 	char *field,linea[MAX_LONG_LINEA];
 	int c,i=0;
 	VTFecha fecha;
@@ -65,4 +65,5 @@ AeroListaADT cargarNextVuelo(FILE *f,vueloADT vuelo){
 	field=strtok(NULL,DELIM);
 	setVueloANAPC(vuelo,field[0]);
 
+	return vuelo;
 }
