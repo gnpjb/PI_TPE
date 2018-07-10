@@ -52,8 +52,8 @@ void freeVuelo(vueloADT vuelo);
 
 
 
-typedef struct *AeropuertoCDT AeropuertoADT;
-typedef struct *AeroListaCDT AeroListaADT;
+typedef struct AeropuertoCDT* AeropuertoADT;
+typedef struct AeroListaCDT* AeroListaADT;
 
 AeropuertoADT newAeropuerto();
 
