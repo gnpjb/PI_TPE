@@ -15,15 +15,6 @@ int main( int argc, char *argv[] ){
 		int year;
 		sscanf(argv[1],"%d",&year);
 		if(year>=2014 && year<=2018){
-			/*
-				1. Pasar todos los aeropuertos a memoria, supongo
-				que con estructuras de 4 campos (oaci, iata,
-				desc, local), los que son suficientes para las
-				4 queries.
-				2. Leer vuelo por vuelo (while y scanf o strtok, lo
-				que convenga), por cada vuelo ejecutar los process
-				3. Imprimir todo
-			*/
 			AeroListaADT aeropuertos=cargarAeropuertos(NOMBRE_ARCHIVO_VUELOS);
 
 			if(aeropuertos==NULL){
@@ -51,15 +42,15 @@ int main( int argc, char *argv[] ){
 			printQuery1(query1,fsalida);
 			fclose(fsalida);
 
-			FILE* fsalida=fopen("movs_internacional.csv","wt");
+			fsalida=fopen("movs_internacional.csv","wt");
 			printQuery2(query2,fsalida);
 			fclose(fsalida);
 
-			FILE* fsalida=fopen("semanal.csv","wt");
+			fsalida=fopen("semanal.csv","wt");
 			printQuery3(query3,fsalida);
 			fclose(fsalida);
 
-			FILE* fsalida=fopen("aerop_detalle.csv","wt");
+			fsalida=fopen("aerop_detalle.csv","wt");
 			printQuery4(query4,fsalida);
 			fclose(fsalida);
 
