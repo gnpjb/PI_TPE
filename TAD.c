@@ -241,13 +241,13 @@ void setVueloDestOaci(vueloADT vuelo,char destOaci[]){
 }
 void setVueloNomAerolin(vueloADT vuelo,char *nomAerolin){
 	if(nomAerolin!=NULL&&nomAerolin[0]!=0){
-		vuelo->nomAerolin=malloc(strlen(nomAerolin));
+		vuelo->nomAerolin=malloc(strlen(nomAerolin)+1);
 		strcpy(vuelo->nomAerolin,nomAerolin);
 	}
 }
 void setVueloAeronave(vueloADT vuelo,char *aeronave){
 	if(aeronave!=NULL&&aeronave[0]!=0){
-		vuelo->aeronave=malloc(strlen(aeronave));
+		vuelo->aeronave=malloc(strlen(aeronave)+1);
 		strcpy(vuelo->aeronave,aeronave);
 	}
 }
