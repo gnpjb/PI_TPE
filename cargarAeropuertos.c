@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "TAD.h"
 #include "cargarAeropuertos.h"
 
 #define DELIM ";"
@@ -9,7 +10,7 @@ AeroListaADT cargarAeropuertos(char *filename){
 
 	FILE* f=fopen(filename,"rt");
 	if(f==NULL){
-		return NULL
+		return NULL;
 	}
 
 	AeroListaADT resp=newAeroLista();
@@ -22,7 +23,7 @@ AeroListaADT cargarAeropuertos(char *filename){
 	while(!feof(f)){
 		i=0;
 		error=0;
-		while((c=fgetc())!='\n'){
+		while((c=fgetc(f))!='\n'){
 			linea[i]=c;
 			i++;
 		}
