@@ -197,7 +197,7 @@ void printQuery4(query4ADT query, FILE * fd){
 
     if(query!=NULL && query->first!=NULL){
 	    fprintf(fd, "oaciLocal;otroOaci;vuelosHacia;vuelosDesde\n");
-	    for(query4Head aux = query->first; aux!=NULL; aux=aux->next){
+	    for(query4Head *aux = query->first; aux!=NULL; aux=aux->next){
 			printQuery4Head(aux,fd);
 	    }
 	}
