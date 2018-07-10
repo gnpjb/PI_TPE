@@ -1,5 +1,6 @@
 #include "query1ADT.h"
 #include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 typedef struct query1CDT{

@@ -11,6 +11,5 @@ void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char lo
 void freeQuery4(query4ADT query);
 void printQuery4(query4ADT query, FILE *fd);
 
-typedef struct query4CDT* query4ADT;
 
 #endif

@@ -1,9 +1,10 @@
-#include "process_queries.h"
+#include <stdio.h>
 #include "TAD.h"
 #include "query1ADT.h"
 #include "query2ADT.h"
 #include "query3ADT.h"
 #include "query4ADT.h"
+#include "process_queries.h"
 #define LOC 0
 #define INT 1
 #define ORIG 1
@@ -74,7 +75,7 @@ static void process_query3(query3ADT query, vueloADT vuelo){
 static void process_query4(query4ADT query,vueloADT vuelo,
 	AeropuertoADT orig,AeropuertoADT dest){
 
-	int flagLocDes=orig!=NULL;
+	int flagLocDes=orig!=NULL
 	,flagLocAter=dest!=NULL;
 	add4(query,getVueloOrigOaci(vuelo),flagLocDes,getVueloDestOaci(vuelo),flagLocAter);
 }

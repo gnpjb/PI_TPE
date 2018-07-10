@@ -5,9 +5,9 @@
 typedef struct query1CDT * query1ADT;
 
 query1ADT newQuery1(void);
-void add(query1ADT, char*, char*);
+void add1(query1ADT,char * oaci, char * local, char * desc);
 void freeQuery1(query1ADT);
-void printQuery1(query1ADT);
+void printQuery1(query1ADT,FILE* file);
 
 
 #endif // QUERY1ADT_H_INCLUDED

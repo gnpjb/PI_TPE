@@ -1,6 +1,7 @@
 #include "query2ADT.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 typedef struct query2CDT{
     q2Node * first;

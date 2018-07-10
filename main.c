@@ -7,6 +7,7 @@
 #include "TAD.h"
 #include "cargarAeropuertos.h"
 #include "cargarNextVuelo.h"
+#include "process_queries.h"
 
 #define NOMBRE_ARCHIVO_AEROPUERTOS ""
 #define NOMBRE_ARCHIVO_VUELOS ""
