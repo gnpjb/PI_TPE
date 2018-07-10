@@ -9,7 +9,7 @@ typedef struct AeropuertoCDT{
 	char oaci[LONG_CODIGO_OACI];
 	char iata[LONG_CODIGO_IATA];
 	char tipo;
-	int *denominacion;
+	char *denominacion;
 	char condicion;
 	char trafico;
 }AeropuertoCDT;
