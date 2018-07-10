@@ -102,7 +102,7 @@ void printQuery2(query2ADT query, FILE * fd){
 
     fprintf(fd, "oaci;iata;cant_despg;cant_aterr;suma\n");
     for(q2Node *aux = query->first; aux!=NULL; aux=aux->next){
-        fprintf(fd, "%4s%3s%d%d%d\n", aux->oaci, aux->iata, aux->tkoffs, aux->ldings, aux->suma);
+        fprintf(fd, "%4s%3s%ld%ld%ld\n", aux->oaci, aux->iata, aux->tkoffs, aux->ldings, aux->suma);
     }
     return;
 
@@ -111,7 +111,7 @@ void printQuery2(query2ADT query, FILE * fd){
 
 void freeQuery2(query2ADT query){
 
-    q2Node * aux = query->first, aux1;
+    q2Node * aux = query->first, *aux1;
     while(aux!=NULL){
 
         aux1 = aux->next;
