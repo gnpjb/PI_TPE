@@ -18,7 +18,6 @@ AeroListaADT cargarAeropuertos(char *filename){
 
 	char linea[MAX_LONG_LINEA];
 
-	int c;
 	char *field;
 	while(fgets(linea,MAX_LONG_LINEA,f)){
 		//primer field es local
