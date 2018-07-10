@@ -68,7 +68,7 @@ static void process_query3(query3ADT query, vueloADT vuelo){
     int c;
     if(c=getDayOfWeek(getVueloFecha(vuelo))!=-1){  /*getDayOfWeek recibe una fecha y retorna un dia de semana [0-6],
                                                 si hay algun error retorna -1*/
-        query->days[c]++;
+        add3(query,c);
     }
 }
 
@@ -82,7 +82,7 @@ static void process_query4(query4ADT query,vueloADT vuelo,
 
 void processVuelo(
 	AeroListaADT aerolista,
-	query1ADT query1,query2ADT query2,query3ADT query3, query4ADT query4ADT,
+	query1ADT query1,query2ADT query2,query3ADT query3, query4ADT query4,
 	vueloADT vuelo){
 
 	AeropuertoADT aOrig,aDest;

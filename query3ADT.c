@@ -12,8 +12,9 @@ query3ADT newQuery3(void){
 }
 
 void add3(query3ADT query, int day){
-
-    query->days[day]++;
+	if(day>=0&&day<=6){
+		query->days[day]++;
+	}
 }
 
 void printQuery3(query3ADT query, FILE * fd){
