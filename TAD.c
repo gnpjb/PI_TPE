@@ -50,7 +50,7 @@ void setAeropuertoTipo(AeropuertoADT aeropuerto,int tipo){
 }
 void setAeropuertoDenominacion(AeropuertoADT aeropuerto,char *denominacion){
 	if(denominacion!=NULL&&denominacion[0]!=0){
-		aeropuerto->denominacion=malloc(strlen(denominacion)+1);
+		aeropuerto->denominacion=realloc(aeropuerto->denominacion,strlen(denominacion)+1);
 		strcpy(aeropuerto->denominacion,denominacion);
 	}
 }
@@ -234,20 +234,22 @@ void setVueloTipoDeMov(vueloADT vuelo,char tipoDeMov){
 	vuelo->tipoDeMov=tipoDeMov;
 }
 void setVueloOrigOaci(vueloADT vuelo,char origOaci[]){
-		strcpy(vuelo->origOaci,origOaci);
+		if(strlen(origOaci)==LONG_CODIGO_OACI)
+			strcpy(vuelo->origOaci,origOaci);
 }
 void setVueloDestOaci(vueloADT vuelo,char destOaci[]){
-		strcpy(vuelo->destOaci,destOaci);
+		if(strlen(destOaci)==LONG_CODIGO_OACI)
+			strcpy(vuelo->destOaci,destOaci);
 }
 void setVueloNomAerolin(vueloADT vuelo,char *nomAerolin){
 	if(nomAerolin!=NULL&&nomAerolin[0]!=0){
-		vuelo->nomAerolin=malloc(strlen(nomAerolin)+1);
+		vuelo->nomAerolin=realloc(vuelo->nomAerolin,strlen(nomAerolin)+1);
 		strcpy(vuelo->nomAerolin,nomAerolin);
 	}
 }
 void setVueloAeronave(vueloADT vuelo,char *aeronave){
 	if(aeronave!=NULL&&aeronave[0]!=0){
-		vuelo->aeronave=malloc(strlen(aeronave)+1);
+		vuelo->aeronave=realloc(vuelo->aeronave,strlen(aeronave)+1);
 		strcpy(vuelo->aeronave,aeronave);
 	}
 }

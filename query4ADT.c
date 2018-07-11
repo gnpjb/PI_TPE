@@ -9,7 +9,7 @@
 
 typedef struct query4Node{
 	struct query4Node* next;
-	char otroOaci[LONG_OACI];
+	char otroOaci[LONG_OACI+1];
 	long aterrizajes;
 	long despegues;
 }query4Node;
@@ -17,7 +17,7 @@ typedef struct query4Node{
 typedef struct query4Head{
 	struct query4Head* next;
 	query4Node* first;
-	char localOaci[LONG_OACI];
+	char localOaci[LONG_OACI+1];
 }query4Head;
 
 //lista de nodos a listas de entradas de query4
@@ -38,14 +38,14 @@ static void addToHead(query4Head* head, char otroOaci[],int tipoDeMov){
 
 	//el objetivo de esta serie de if-else es encontrar el otroOaci o crearlo
 	//si no existiese
-	if(head->first==NULL||(c=memcmp(otroOaci,head->first->otroOaci,LONG_OACI)<0)){
+	if(head->first==NULL||(c=strcmp(otroOaci,head->first->otroOaci)<0)){
 
 		aux=head->first;
 		head->first=malloc(sizeof(*head->first));
 		head->first->next=aux;
 		head->first->aterrizajes=0;
 		head->first->despegues=0;
-		memcpy(head->first->otroOaci,otroOaci,LONG_OACI);
+		strcpy(head->first->otroOaci,otroOaci);
 		aux=head->first;
 
 	}
@@ -60,12 +60,13 @@ static void addToHead(query4Head* head, char otroOaci[],int tipoDeMov){
 		wAuxPrev=head->first;
 		wAux=wAuxPrev->next;
 		while(!found){
-			if(wAux==NULL||(c=memcmp(otroOaci,wAux->otroOaci,LONG_OACI))<0){
+			if(wAux==NULL||(c=strcmp(otroOaci,wAux->otroOaci))<0){
 				wAuxPrev->next=malloc(sizeof(*wAuxPrev->next));
-				memcpy(wAuxPrev->next->otroOaci,otroOaci,LONG_OACI);
+				strcpy(wAuxPrev->next->otroOaci,otroOaci);
 				wAuxPrev->next->aterrizajes=0;
 				wAuxPrev->next->despegues=0;
 				wAuxPrev->next->next=wAux;
+				aux=wAuxPrev->next;
 				found=1;
 			}
 			else if(c==0){
@@ -95,11 +96,11 @@ void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char lo
 
 
 		//si no hay nada en first o hay que insertar antes de first
-		if(query->first==NULL||(c=memcmp(oaciDes,query->first->localOaci,LONG_OACI)<0)){
+		if(query->first==NULL||(c=strcmp(oaciDes,query->first->localOaci)<0)){
 			aux=query->first;
 			query->first=malloc(sizeof(*query->first));
 			query->first->next=aux;
-			memcpy(query->first->localOaci,oaciDes,LONG_OACI);
+			strcpy(query->first->localOaci,oaciDes);
 			query->first->first=NULL;
 			addToHead(query->first,oaciAter,DES);
 		}
@@ -114,14 +115,14 @@ void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char lo
 		else{
 			int found=0;
 			query4Head* aux1=query->first;
-			aux=query->first->next;
+			aux=aux1->next;
 			//sino se recorre hasta encontrar donde agregarlo
 			while( !found ){
-				if(aux==NULL||(c=memcmp(oaciDes,aux->localOaci,LONG_OACI))<0){
+				if(aux==NULL||(c=strcmp(oaciDes,aux->localOaci))<0){
 					aux1->next=malloc(sizeof(*aux1->next));
 					aux1->next->first=NULL;
 					aux1->next->next=aux;
-					memcpy(aux1->next->localOaci,oaciDes,LONG_OACI);
+					strcpy(aux1->next->localOaci,oaciDes);
 					aux=aux1->next;
 					found=1;
 				}
@@ -143,11 +144,11 @@ void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char lo
 
 
 		//si no hay nada en first o hay que insertar antes de first
-		if(query->first==NULL||(c=memcmp(oaciAter,query->first->localOaci,LONG_OACI)<0)){
+		if(query->first==NULL||(c=strcmp(oaciAter,query->first->localOaci)<0)){
 			aux=query->first;
 			query->first=malloc(sizeof(*query->first));
 			query->first->next=aux;
-			memcpy(query->first->localOaci,oaciAter,LONG_OACI);
+			strcpy(query->first->localOaci,oaciAter);
 			query->first->first=NULL;
 			addToHead(query->first,oaciDes,ATER);
 		}
@@ -165,11 +166,11 @@ void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char lo
 			aux=query->first->next;
 			//sino se recorre hasta encontrar donde agregarlo
 			while( !found ){
-				if(aux==NULL||(c=memcmp(oaciAter,aux->localOaci,LONG_OACI))<0){
+				if(aux==NULL||(c=strcmp(oaciAter,aux->localOaci))<0){
 					aux1->next=malloc(sizeof(*aux1->next));
 					aux1->next->first=NULL;
 					aux1->next->next=aux;
-					memcpy(aux1->next->localOaci,oaciAter,LONG_OACI);
+					strcpy(aux1->next->localOaci,oaciAter);
 					aux=aux1->next;
 					found=1;
 				}
@@ -189,16 +190,19 @@ void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char lo
 static void printQuery4Head(query4Head* head, FILE * fd){
 	query4Node* aux=head->first;
 	while(head!=NULL){
-		fprintf(fd, "%.4s;%.4s;%ld;%ld\n",head->localOaci,aux->otroOaci,aux->aterrizajes,aux->despegues);
+		fprintf(fd, "%s;%s;%ld;%ld\n",head->localOaci,aux->otroOaci,aux->aterrizajes,aux->despegues);
+		aux=aux->next;
 	}
 }
 
 void printQuery4(query4ADT query, FILE * fd){
 
-    if(query!=NULL && query->first!=NULL){
+    if(fd!=NULL&&query!=NULL && query->first!=NULL){
 	    fprintf(fd, "oaciLocal;otroOaci;vuelosHacia;vuelosDesde\n");
-	    for(query4Head *aux = query->first; aux!=NULL; aux=aux->next){
+		query4Head *aux = query->first;
+		while(aux!=NULL){
 			printQuery4Head(aux,fd);
+			aux=aux->next;
 	    }
 	}
 }
