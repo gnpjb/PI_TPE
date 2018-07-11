@@ -84,14 +84,10 @@ void printQuery1(query1ADT query, FILE * fd){
 
     if(query==NULL || query->first==NULL)
         return;
-    char * fmt = malloc(MAX_FMT);
-
     fprintf(fd, "oaci;local;desc;cant_movs\n");
     for(q1Node *aux = query->first; aux!=NULL; aux=aux->next){
-        sprintf(fmt, "%%4s;%%3s;%%%lus;%%ld\n", (unsigned long)strlen(aux->desc));
-        fprintf(fd, fmt, aux->oaci, aux->local, aux->desc, aux->cant);
+        fprintf(fd, "%s;%s;%s;%ld\n", aux->oaci, aux->local, aux->desc, aux->cant);
     }
-    free(fmt);
     return;
 
 }
@@ -106,4 +102,5 @@ void freeQuery1(query1ADT query){
         free(aux);
         aux=aux1;
     }
+	free(query);
 }

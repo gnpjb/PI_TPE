@@ -189,7 +189,7 @@ void add4(query4ADT query,char oaciDes[],char locFlagDes,char oaciAter[],char lo
 
 static void printQuery4Head(query4Head* head, FILE * fd){
 	query4Node* aux=head->first;
-	while(head!=NULL){
+	while(aux!=NULL){
 		fprintf(fd, "%s;%s;%ld;%ld\n",head->localOaci,aux->otroOaci,aux->aterrizajes,aux->despegues);
 		aux=aux->next;
 	}
@@ -209,7 +209,7 @@ void printQuery4(query4ADT query, FILE * fd){
 
 //funciones de liberacion de memoria
 static void freeQuery4Head(query4Head* qHead){
-	query4Head *aux=qHead->next,*aux1;
+	query4Node *aux=qHead->first,*aux1;
 	while(aux!=NULL){
 		aux1=aux->next;
 		free(aux);
